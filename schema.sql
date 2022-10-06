@@ -271,3 +271,27 @@ di.first_name,
 -- INTO salesdpt_info
 FROM dept_info as di
 WHERE dept_name = 'Sales'
+
+-- Challenge
+SELECT e.emp_no,
+e.first_name,
+e.last_name,
+titles.title, 
+titles.from_date,
+titles.to_date
+-- INTO retirement_titles
+FROM employees as e
+INNER JOIN titles as titles
+ON titles.emp_no = e.emp_no
+WHERE birth_date BETWEEN '1952-01-01' AND '1955-12-31'
+ORDER BY e.emp_no ASC;
+
+-- Use Dictinct with Orderby to remove duplicate rows
+SELECT DISTINCT ON (emp_no) emp_no,
+first_name,
+last_name,
+title
+INTO unique_titles
+FROM retirement_titles
+WHERE to_date = '9999-01-01'
+ORDER BY emp_no ASC, to_date DESC;
